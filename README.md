@@ -1,4 +1,4 @@
-Entrega de atividade avaliativa para alinhamento da nota N1 
+<h2>Entrega de atividade avaliativa para alinhamento da nota N1</h2> 
 
 Na tarefa foi passado um desafio para criar um aplicativo para auxiliar os médicos hospitalistas a controlarem os critérios de Rason.
 Por conta disto, optei por fazer uma pequena alteração do exemplo solicitado, já que a ideia principal de um desenvolvedor é trazer conforto naquilo em que é desenvolvido, 
