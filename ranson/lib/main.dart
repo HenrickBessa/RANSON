@@ -30,38 +30,37 @@ class _MyFormState extends State<MyForm> {
   Paciente paciente = Paciente();
   Dados dados = Dados();
 
-  void calcularEscoreMortalidade() {
+  void calculateMortalityScore() {
     setState(() {
-      int score = calcularEscore();
+      int score = calculateEscore();
       paciente.escore = score;
-      paciente.mortalidade = calcularMortalidade(score);
+      paciente.mortalidade = calculateMortality(score);
     });
   }
 
-  int calcularEscore() {
+  int calculateEscore() {
     int score = 0;
     if (paciente.litiaseBiliar) {
-      score += verificarParametro(paciente.idade, dados.idadeLitiase);
-      score += verificarParametro(paciente.leucocitos, dados.leucocitosLitiase);
-      score += verificarParametro(paciente.glicemia, dados.glicemiaLitiase);
-      score += verificarParametro(paciente.astTgo, dados.astTgoLimite);
-      score += verificarParametro(paciente.ldh, dados.ldhLitiase);
+      score += checkParameter(paciente.idade, dados.idadeLitiase);
+      score += checkParameter(paciente.leucocitos, dados.leucocitosLitiase);
+      score += checkParameter(paciente.glicemia, dados.glicemiaLitiase);
+      score += checkParameter(paciente.astTgo, dados.astTgoLimite);
+      score += checkParameter(paciente.ldh, dados.ldhLitiase);
     } else {
-      score += verificarParametro(paciente.idade, dados.idadeSemLitiase);
-      score +=
-          verificarParametro(paciente.leucocitos, dados.leucocitosSemLitiase);
-      score += verificarParametro(paciente.glicemia, dados.glicemiaSemLitiase);
-      score += verificarParametro(paciente.astTgo, dados.astTgoLimite);
-      score += verificarParametro(paciente.ldh, dados.ldhSemLitiase);
+      score += checkParameter(paciente.idade, dados.idadeSemLitiase);
+      score += checkParameter(paciente.leucocitos, dados.leucocitosSemLitiase);
+      score += checkParameter(paciente.glicemia, dados.glicemiaSemLitiase);
+      score += checkParameter(paciente.astTgo, dados.astTgoLimite);
+      score += checkParameter(paciente.ldh, dados.ldhSemLitiase);
     }
     return score;
   }
 
-  int verificarParametro(num valorPaciente, num limite) {
+  int checkParameter(num valorPaciente, num limite) {
     return valorPaciente > limite ? 1 : 0;
   }
 
-  double calcularMortalidade(int score) {
+  double calculateMortality(int score) {
     if (score < 3) {
       return 2.0;
     } else if (score < 5) {
@@ -113,7 +112,7 @@ class _MyFormState extends State<MyForm> {
                 },
                 onChanged: (value) {
                   paciente.idade = int.tryParse(value) ?? 0;
-                  calcularEscoreMortalidade();
+                  calculateMortalityScore();
                 },
               ),
               Row(
@@ -123,7 +122,7 @@ class _MyFormState extends State<MyForm> {
                     onChanged: (bool? value) {
                       setState(() {
                         paciente.litiaseBiliar = value ?? false;
-                        calcularEscoreMortalidade();
+                        calculateMortalityScore();
                       });
                     },
                   ),
@@ -154,7 +153,7 @@ class _MyFormState extends State<MyForm> {
                       },
                       onChanged: (value) {
                         paciente.leucocitos = int.tryParse(value) ?? 0;
-                        calcularEscoreMortalidade();
+                        calculateMortalityScore();
                       },
                     ),
                   ),
@@ -184,7 +183,7 @@ class _MyFormState extends State<MyForm> {
                           double.tryParse(value ?? '0') ?? 0.0,
                       onChanged: (value) {
                         paciente.glicemia = double.tryParse(value) ?? 0.0;
-                        calcularEscoreMortalidade();
+                        calculateMortalityScore();
                       },
                     ),
                   ),
@@ -214,7 +213,7 @@ class _MyFormState extends State<MyForm> {
                       },
                       onChanged: (value) {
                         paciente.astTgo = int.tryParse(value) ?? 0;
-                        calcularEscoreMortalidade();
+                        calculateMortalityScore();
                       },
                     ),
                   ),
@@ -248,7 +247,7 @@ class _MyFormState extends State<MyForm> {
                       },
                       onChanged: (value) {
                         paciente.ldh = int.tryParse(value) ?? 0;
-                        calcularEscoreMortalidade();
+                        calculateMortalityScore();
                       },
                     ),
                   ),
@@ -282,7 +281,7 @@ class _MyFormState extends State<MyForm> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TelaDeExames(paciente: paciente),
+                        builder: (context) => ExamScreen(paciente: paciente),
                       ),
                     );
                   }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'paciente.dart';
 import 'card.dart';
-class TelaDeExames extends StatelessWidget {
+class ExamScreen extends StatelessWidget {
   final Paciente paciente;
 
-  const TelaDeExames({Key? key, required this.paciente}) : super(key: key);
+  const ExamScreen({Key? key, required this.paciente}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
